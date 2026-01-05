@@ -1,0 +1,40 @@
+@page
+@model gestion_biblio.Pages.Borrowing.ExtendModel
+@{
+    ViewData["Title"] = "Prolonger un emprunt";
+}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 mb-3">Prolonger un emprunt</h1>
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Emprunts ouverts</label>
+                            <select class="form-select" asp-for="RecordID">
+                                @foreach (var r in Model.OpenRecords)
+                                {
+                                    <option value="@r.RecordID">
+                                        @r.Member?.FirstName @r.Member?.LastName - @r.Book?.Title (Échéance actuelle: @r.DueDate.ToShortDateString())
+                                    </option>
+                                }
+                            </select>
+                            <span asp-validation-for="RecordID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="NewDueDate" class="form-label">Nouvelle date d’échéance</label>
+                            <input asp-for="NewDueDate" class="form-control" />
+                            <span asp-validation-for="NewDueDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-between">
+                        <a asp-page="/Books/Index" class="btn btn-outline-secondary">Retour</a>
+                        <button type="submit" class="btn btn-primary">Prolonger</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

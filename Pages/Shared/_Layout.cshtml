@@ -1,0 +1,211 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<gestion_biblio.Models.ApplicationUser> SignInManager
+@inject UserManager<gestion_biblio.Models.ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gestion de bibliotèque</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/gestion_biblio.styles.css" asp-append-version="true" />
+
+    <!-- ✅ MATERIAL SYMBOLS (CORRECT – ONE LINE) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    <!-- ✅ ICONS STYLE -->
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+    </style>
+
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body class="bg-cream text-brown">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark library-navbar">
+        <div class="container">
+
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" asp-page="/Index">
+                <span class="material-symbols-outlined me-2">newsstand</span>
+                <span class="brand-text">Biblio</span>
+            </a>
+
+            <!-- Mobile button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        @* ================= ADMIN ================= *@
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Admin/Dashboard">
+                                    <span class="material-symbols-outlined">bar_chart_4_bars</span>
+                                    Dashboard
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Books/Index">
+                                    <span class="material-symbols-outlined">book_5</span>
+                                    Livres
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Authors/Index">
+                                    <span class="material-symbols-outlined">article_person</span>
+                                    Auteurs
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Members/Index">
+                                    <span class="material-symbols-outlined">user_attributes</span>
+                                    Membres
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Borrowing/Issue">
+                                    <span class="material-symbols-outlined">bookmark_check</span>
+                                    Emprunts
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Reports/OverdueBooks">
+                                    <span class="material-symbols-outlined">clock_loader_40</span>
+                                    Retards
+                                </a>
+                            </li>
+                        }
+
+                        @* ================= LIBRARIAN ================= *@
+                        else if (User.IsInRole("Librarian"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Books/Index">
+                                    <span class="material-symbols-outlined">book_5</span>
+                                    Catalogue
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Borrowing/Issue">
+                                    <span class="material-symbols-outlined">bookmark_check</span>
+                                    Emprunts
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Borrowing/Return">
+                                    <span class="material-symbols-outlined">assignment_return</span>
+                                    Retours
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Reports/OverdueBooks">
+                                    <span class="material-symbols-outlined">clock_loader_40</span>
+                                    Retards
+                                </a>
+                            </li>
+                        }
+
+                        @* ================= MEMBER ================= *@
+                        else if (User.IsInRole("Member"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Books/Index">
+                                    <span class="material-symbols-outlined">book_5</span>
+                                    Catalogue
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Borrowing/Issue">
+                                    <span class="material-symbols-outlined">bookmark_check</span>
+                                    Emprunter
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/User/History">
+                                    <span class="material-symbols-outlined">history</span>
+                                    Historique
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/User/Recommendations">
+                                    <span class="material-symbols-outlined">recommend</span>
+                                    Suggestions
+                                </a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Books/Index">
+                                <span class="material-symbols-outlined">book_5</span>
+                                Catalogue
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+                <!-- Login / Logout -->
+                <partial name="_LoginPartial" />
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- BODY -->
+<div class="container py-4">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="border-top footer text-muted bg-tan">
+    <div class="container text-center">
+        &copy; @DateTime.Now.Year - Gestion Biblio
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

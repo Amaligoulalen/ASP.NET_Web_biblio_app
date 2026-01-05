@@ -1,0 +1,219 @@
+﻿/* Root Variables */
+:root {
+    --primary-color: #6B4423;
+    --secondary-color: #8B5A3C;
+    --accent-color: #D4A574;
+    --bg-cream: #FAF7F2;
+    --bg-tan: #E8DED1;
+    --text-dark: #3E2723;
+    --hover-color: #A67C52;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Global Styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar Styles */
+.library-navbar {
+    background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%) !important;
+    box-shadow: 0 2px 8px var(--shadow);
+    padding: 0.75rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FFFFFF !important;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.navbar-brand:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    color: #FFFFFF !important;
+}
+
+.navbar-brand .material-symbols-outlined {
+    font-size: 2rem;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+.brand-text {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+}
+
+/* Nav Links */
+.navbar-nav .nav-link {
+    color: #FFFFFF !important;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF !important;
+    transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link:active {
+    transform: translateY(0);
+}
+
+/* Navbar Toggle */
+.navbar-toggler {
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    padding: 0.5rem 0.75rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Login Partial Links */
+.navbar-nav .nav-link.text-dark {
+    color: #FFFFFF !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow);
+    color: #FFFFFF;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow);
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: #FFFFFF;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Links */
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--hover-color);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--bg-tan);
+    padding: 1.5rem 0;
+    margin-top: auto;
+    border-top: 2px solid var(--accent-color);
+    color: var(--text-dark);
+}
+
+/* Utility Classes */
+.bg-cream {
+    background-color: var(--bg-cream);
+}
+
+.bg-tan {
+    background-color: var(--bg-tan);
+}
+
+.text-brown {
+    color: var(--text-dark);
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px var(--shadow);
+}
+
+/* Form Controls */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        padding: 1rem 0;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+        margin: 0.25rem 0;
+    }
+    
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    
+    .navbar-brand .material-symbols-outlined {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+}
+
+/* Box Shadow Utility */
+.box-shadow {
+    box-shadow: 0 4px 12px var(--shadow);
+}

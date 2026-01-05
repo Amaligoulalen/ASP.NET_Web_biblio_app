@@ -1,0 +1,242 @@
+@page "{id:int}"
+@model gestion_biblio.Pages.Authors.EditModel
+@{
+    ViewData["Title"] = "Modifier l'auteur";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+    }
+
+    .edit-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .edit-card {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(160, 82, 45, 0.15);
+        overflow: hidden;
+        border: 2px solid #FFE4C4;
+    }
+
+    .edit-header {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        color: #FFF8DC;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .edit-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .edit-body {
+        padding: 40px;
+    }
+
+    .form-section {
+        margin-bottom: 25px;
+    }
+
+    .section-title {
+        color: #8B4513;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #D2B48C;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-label {
+        color: #8B4513;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .form-control {
+        border: 2px solid #D2B48C;
+        border-radius: 10px;
+        padding: 12px 15px;
+        transition: all 0.3s ease;
+        background-color: #FFF8DC;
+        color: #8B4513;
+    }
+
+    .form-control:focus {
+        border-color: #A0522D;
+        box-shadow: 0 0 0 0.2rem rgba(160, 82, 45, 0.15);
+        background-color: #FFFFFF;
+    }
+
+    .validation-summary {
+        background: linear-gradient(135deg, #FFB6C1 0%, #FFD1DC 100%);
+        color: #8B1538;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 2px solid #FF9BAE;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .text-danger {
+        color: #8B1538 !important;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: space-between;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 2px solid #FFE4C4;
+        flex-wrap: wrap;
+    }
+
+    .btn-custom {
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        border: 2px solid;
+        cursor: pointer;
+    }
+
+    .btn-cancel {
+        background-color: #F5F5DC;
+        color: #8B4513;
+        border-color: #D2B48C;
+    }
+
+    .btn-cancel:hover {
+        background-color: #FFF8DC;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(160, 82, 45, 0.2);
+        color: #8B4513;
+        text-decoration: none;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+        color: #FFF8DC;
+        border-color: #8B4513;
+    }
+
+    .btn-save:hover {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    }
+
+    @@media (max-width: 768px) {
+        .edit-title {
+            font-size: 1.5rem;
+        }
+
+        .edit-body {
+            padding: 20px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .btn-custom {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<div class="edit-container">
+    <div class="edit-card">
+        <div class="edit-header">
+            <h1 class="edit-title">
+                <span class="material-symbols-outlined" style="font-size: 2rem;">edit</span>
+                <span>Modifier l'auteur</span>
+            </h1>
+        </div>
+
+        <div class="edit-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="validation-summary">
+                    <span class="material-symbols-outlined">error</span>
+                    <span>Veuillez corriger les erreurs ci-dessous</span>
+                </div>
+
+                <input type="hidden" asp-for="Author.AuthorID" />
+
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="material-symbols-outlined">badge</span>
+                        <span>Informations de l'auteur</span>
+                    </h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Author.FirstName" class="form-label">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>Prénom</span>
+                            </label>
+                            <input asp-for="Author.FirstName" 
+                                   class="form-control" 
+                                   placeholder="Prénom de l'auteur" />
+                            <span asp-validation-for="Author.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Author.LastName" class="form-label">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>Nom</span>
+                            </label>
+                            <input asp-for="Author.LastName" 
+                                   class="form-control" 
+                                   placeholder="Nom de l'auteur" />
+                            <span asp-validation-for="Author.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a asp-page="/Authors/Index" class="btn-custom btn-cancel">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        <span>Annuler</span>
+                    </a>
+                    <button type="submit" class="btn-custom btn-save">
+                        <span class="material-symbols-outlined">save</span>
+                        <span>Enregistrer les modifications</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

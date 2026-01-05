@@ -1,0 +1,101 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+:root {
+  --coffee: #A0522D;
+  --tan: #D2B48C;
+  --beige: #F5F5DC;
+  --cornsilk: #FFF8DC;
+  --saddlebrown: #8B4513;
+  --bisque: #FFE4C4;
+}
+
+body.bg-cream {
+  background-color: var(--beige);
+}
+.text-brown { color: var(--saddlebrown); }
+
+.library-navbar {
+  background-color: var(--coffee);
+}
+.library-navbar .nav-link,
+.library-navbar .navbar-brand { color: #fff; }
+.library-navbar .nav-link.active { font-weight: 600; }
+
+.bg-tan { background-color: var(--tan); }
+
+.btn-primary {
+  background-color: var(--saddlebrown);
+  border-color: var(--saddlebrown);
+}
+.btn-primary:hover {
+  background-color: var(--coffee);
+  border-color: var(--coffee);
+}
+
+.btn-outline-primary {
+  color: var(--saddlebrown);
+  border-color: var(--saddlebrown);
+}
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--saddlebrown);
+}
+
+.card { border-color: var(--tan); }
+.card-header { background-color: var(--cornsilk); }
+.card-body { background-color: var(--bisque); }
+
+.form-control:focus {
+  border-color: var(--coffee);
+  box-shadow: 0 0 0 0.2rem rgba(160, 82, 45, 0.25);
+}
+
+.navbar .dropdown-menu { background-color: var(--cornsilk); }
+.navbar .dropdown-item:hover { background-color: var(--bisque); }
+
+/* Modern table styling */
+.table-lib {
+  border-color: var(--tan);
+}
+.table-lib thead th {
+  background-color: var(--cornsilk);
+  color: var(--saddlebrown);
+  border-bottom: 2px solid var(--tan);
+}
+.table-lib tbody tr:hover {
+  background-color: rgba(255, 228, 196, 0.4);
+}
+.table-lib td, .table-lib th {
+  vertical-align: middle;
+}
+
+/* Navbar hover state */
+.library-navbar .nav-link:hover {
+  color: var(--tan);
+}
+
+/* Card spacing */
+.card .card-body {
+  padding: 1.25rem 1.5rem;
+}

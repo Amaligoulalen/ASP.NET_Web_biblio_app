@@ -1,0 +1,278 @@
+@page "{id:int}"
+@model gestion_biblio.Pages.Authors.DeleteModel
+@{
+    ViewData["Title"] = "Supprimer l'auteur";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+    }
+
+    .delete-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 12px;
+    }
+
+    .delete-card {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(160, 82, 45, 0.15);
+        overflow: hidden;
+        border: 2px solid #FFE4C4;
+    }
+
+    .delete-header {
+        background: linear-gradient(135deg, #FFB6C1 0%, #FF9BAE 100%);
+        color: #8B1538;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .delete-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .delete-subtitle {
+        font-size: 1rem;
+        margin-top: 10px;
+        opacity: 0.9;
+    }
+
+    .delete-body {
+        padding: 40px;
+    }
+
+    .warning-box {
+        background: linear-gradient(135deg, #FFE4C4 0%, #FFF8DC 100%);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #FF9BAE;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: start;
+        gap: 15px;
+    }
+
+    .warning-box .material-symbols-outlined {
+        font-size: 2rem;
+        color: #8B1538;
+        margin-top: 2px;
+    }
+
+    .warning-content {
+        flex: 1;
+    }
+
+    .warning-title {
+        color: #8B1538;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .warning-text {
+        color: #A0522D;
+        line-height: 1.6;
+    }
+
+    .author-info {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        padding: 25px;
+        border-radius: 12px;
+        border: 2px solid #D2B48C;
+        margin-bottom: 30px;
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 12px 0;
+        border-bottom: 1px solid #FFE4C4;
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #8B4513;
+        min-width: 100px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .info-value {
+        color: #A0522D;
+        flex: 1;
+        font-size: 1.1rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: space-between;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 2px solid #FFE4C4;
+        flex-wrap: wrap;
+    }
+
+    .btn-custom {
+        padding: 12px ;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        border: 2px solid;
+        cursor: pointer;
+    }
+
+    .btn-cancel {
+        background-color: #F5F5DC;
+        color: #8B4513;
+        border-color: #D2B48C;
+    }
+
+    .btn-cancel:hover {
+        background-color: #FFF8DC;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(160, 82, 45, 0.2);
+        color: #8B4513;
+        text-decoration: none;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #FFB6C1 0%, #FF9BAE 100%);
+        color: #8B1538;
+        border-color: #FF9BAE;
+    }
+
+    .btn-delete:hover {
+        background: linear-gradient(135deg, #FF9BAE 0%, #FFB6C1 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 21, 56, 0.3);
+    }
+
+    @@media (max-width: 768px) {
+        .delete-title {
+            font-size: 1.5rem;
+        }
+
+        .delete-body {
+            padding: 20px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .btn-custom {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<div class="delete-container">
+    <div class="delete-card">
+        <div class="delete-header">
+            <h1 class="delete-title">
+                <span class="material-symbols-outlined" style="font-size: 2rem;">delete</span>
+                <span>Supprimer l'auteur</span>
+            </h1>
+            <p class="delete-subtitle">Cette action est irréversible</p>
+        </div>
+
+        <div class="delete-body">
+            <div class="warning-box">
+                <span class="material-symbols-outlined">warning</span>
+                <div class="warning-content">
+                    <div class="warning-title">Attention !</div>
+                    <div class="warning-text">
+                        Êtes-vous sûr de vouloir supprimer cet auteur ? Cette action est définitive et ne peut pas être annulée. 
+                        Tous les livres associés à cet auteur perdront leur référence d'auteur.
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Author != null)
+            {
+                <div class="author-info">
+                    <div class="info-row">
+                        <div class="info-label">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>Prénom</span>
+                        </div>
+                        <div class="info-value">@Model.Author.FirstName</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>Nom</span>
+                        </div>
+                        <div class="info-value">@Model.Author.LastName</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">
+                            <span class="material-symbols-outlined">menu_book</span>
+                            <span>Livres</span>
+                        </div>
+                        <div class="info-value">@Model.Author.Books.Count livre@(Model.Author.Books.Count > 1 ? "s" : "")</div>
+                    </div>
+                </div>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Author.AuthorID" />
+                    
+                    <div class="action-buttons">
+                        <a asp-page="/Authors/Index" class="btn-custom btn-cancel">
+                            <span class="material-symbols-outlined">close</span>
+                            <span>Annuler</span>
+                        </a>
+                        <button type="submit" class="btn-custom btn-delete">
+                            <span class="material-symbols-outlined">delete_forever</span>
+                            <span>Confirmer la suppression</span>
+                        </button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="warning-box">
+                    <span class="material-symbols-outlined">error</span>
+                    <div class="warning-content">
+                        <div class="warning-title">Auteur introuvable</div>
+                        <div class="warning-text">
+                            Cet auteur n'existe pas ou a déjà été supprimé.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a asp-page="/Authors/Index" class="btn-custom btn-cancel">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        <span>Retour à la liste</span>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

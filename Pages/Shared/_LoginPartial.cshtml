@@ -1,0 +1,74 @@
+@using Microsoft.AspNetCore.Identity
+@using gestion_biblio.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+<ul class="navbar-nav align-items-center">
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-light d-flex align-items-center"
+           asp-area="Identity"
+           asp-page="/Account/Manage/Index"
+           title="Profile">
+
+            <span class="material-symbols-outlined me-1">
+                account_circle
+            </span>
+
+          @user?.FullName
+
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <form asp-area="Identity"
+              asp-page="/Account/Logout"
+              asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+
+            <button type="submit"
+                    class="nav-link btn btn-link text-light d-flex align-items-center">
+
+                <span class="material-symbols-outlined me-1">
+                    logout
+                </span>
+
+                Logout
+            </button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-light d-flex align-items-center"
+           asp-area=""
+           asp-page="/Members/Register">
+
+            <span class="material-symbols-outlined me-1">
+                person_add
+            </span>
+
+            Register
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-light d-flex align-items-center"
+           asp-area="Identity"
+           asp-page="/Account/Login">
+
+            <span class="material-symbols-outlined me-1">
+                login
+            </span>
+
+            Login
+        </a>
+    </li>
+}
+
+</ul>

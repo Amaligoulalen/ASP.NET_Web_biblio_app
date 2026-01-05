@@ -1,0 +1,250 @@
+@page
+@model gestion_biblio.Pages.Members.RegisterModel
+@{
+    ViewData["Title"] = "Inscription";
+}
+
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" />
+
+<style>
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    vertical-align: middle;
+}
+
+.register-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+}
+
+.register-card {
+    background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(160, 82, 45, 0.15);
+    overflow: hidden;
+    border: 2px solid #FFE4C4;
+    width: 100%;
+}
+
+.register-header {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    color: #FFF8DC;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+.register-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.register-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.register-subtitle {
+    font-size: 1rem;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+.register-body {
+    padding: 40px 30px;
+}
+
+.form-section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    color: #8B4513;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #D2B48C;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-label {
+    color: #8B4513;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    border: 2px solid #D2B48C;
+    border-radius: 10px;
+    padding: 12px 15px;
+    background-color: #FFF8DC;
+    color: #8B4513;
+}
+
+.text-danger {
+    font-size: 0.85rem;
+}
+
+.password-requirements {
+    background-color: #FFF8DC;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #A0522D;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #A0522D;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #FFE4C4;
+}
+
+.btn-custom {
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid;
+    cursor: pointer;
+}
+
+.btn-register {
+    background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+    color: #FFF8DC;
+    border-color: #8B4513;
+}
+
+.btn-login {
+    background-color: #F5F5DC;
+    color: #8B4513;
+    border-color: #D2B48C;
+}
+</style>
+
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <div class="register-icon">
+                <span class="material-symbols-outlined" style="font-size:48px;">
+                    account_circle
+                </span>
+            </div>
+            <h1 class="register-title">Créer votre compte</h1>
+            <p class="register-subtitle">Rejoignez notre bibliothèque dès maintenant !</p>
+        </div>
+
+        <div class="register-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="material-symbols-outlined">person_text</span>
+                        Informations personnelles
+                    </h2>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Member.FirstName" class="form-label">
+                                Prénom
+                            </label>
+                            <input asp-for="Member.FirstName" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Member.LastName" class="form-label">
+                                Nom
+                            </label>
+                            <input asp-for="Member.LastName" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    @*<h2 class="section-title">
+                        <span class="material-symbols-outlined">alternate_email</span>
+                        Coordonnées
+                    </h2>*@
+
+                    <label asp-for="Member.Email" class="form-label">
+                        <span class="material-symbols-outlined">alternate_email</span>
+                        Email
+                    </label>
+                    <input asp-for="Member.Email" class="form-control" />
+
+                    <label asp-for="Member.PhoneNumber" class="form-label mt-3">
+                        <span class="material-symbols-outlined">mobile</span>
+                        Téléphone
+                    </label>
+                    <input asp-for="Member.PhoneNumber" class="form-control" />
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="material-symbols-outlined">security</span>
+                        Sécurité
+                    </h2>
+
+                    <label asp-for="Password" class="form-label">
+                        <span class="material-symbols-outlined">key</span>
+                        Mot de passe
+                    </label>
+                    <input asp-for="Password" type="password" class="form-control" />
+
+                    <div class="password-requirements">
+                        <strong>
+                            <span class="material-symbols-outlined">security</span>
+                            Exigences du mot de passe :
+                        </strong>
+                        <ul>
+                            <li>Au moins 6 caractères</li>
+                            <li>Une lettre majuscule</li>
+                            <li>Une lettre minuscule</li>
+                            <li>Un chiffre</li>
+                            <li>Un caractère spécial</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn-custom btn-register">
+                        <span class="material-symbols-outlined">account_circle</span>
+                        Créer mon compte
+                    </button>
+
+                    <a asp-area="Identity" asp-page="/Account/Login" class="btn-custom btn-login">
+                        J'ai déjà un compte
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

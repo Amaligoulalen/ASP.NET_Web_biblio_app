@@ -1,0 +1,28 @@
+@page
+@model gestion_biblio.Pages.User.DashboardModel
+@{
+    ViewData["Title"] = "User Dashboard";
+}
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h1 class="h4 mb-2">Welcome</h1>
+        <p class="text-muted mb-0">Browse and borrow books, view your history, and manage your profile.</p>
+    </div>
+</div>
+<div class="row g-3">
+    <div class="col-sm-6 col-lg-4">
+        <a class="btn btn-primary w-100" asp-page="/Books/Index">Browse Books</a>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <a class="btn btn-outline-secondary w-100" asp-page="/Borrowing/Issue">Borrow a Book</a>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <a class="btn btn-outline-secondary w-100" asp-page="/Borrowing/Return">Return a Book</a>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <a class="btn btn-outline-secondary w-100" asp-page="/User/History">My Borrowing History</a>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <a class="btn btn-outline-secondary w-100" asp-page="/Members/Index">Update Profile</a>
+    </div>
+</div>

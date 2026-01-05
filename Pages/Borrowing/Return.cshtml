@@ -1,0 +1,42 @@
+@page
+@model gestion_biblio.Pages.Borrowing.ReturnModel
+@{
+    ViewData["Title"] = "Return Book";
+}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 mb-3">Return a Book</h1>
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Open Borrow Records</label>
+                            <select class="form-select" asp-for="RecordID">
+                                @foreach (var r in Model.OpenRecords)
+                                {
+                                    <option value="@r.RecordID">
+                                        @r.Member?.FirstName @r.Member?.LastName - @r.Book?.Title (Due: @r.DueDate.ToShortDateString())
+                                    </option>
+                                }
+                            </select>
+                            <span asp-validation-for="RecordID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ReturnDate" class="form-label"></label>
+                            <input asp-for="ReturnDate" class="form-control" />
+                            <span asp-validation-for="ReturnDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Confirm Return</button>
+                        <a asp-page="/Books/Index" class="btn btn-outline-secondary">Back to Books</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

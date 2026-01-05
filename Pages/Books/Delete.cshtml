@@ -1,0 +1,36 @@
+@page "{id:int}"
+@model gestion_biblio.Pages.Books.DeleteModel
+@{
+    ViewData["Title"] = "Supprimer le livre";
+}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 mb-3">Supprimer le livre</h1>
+                @if (Model.Book == null)
+                {
+                    <div class="alert alert-danger">Livre introuvable.</div>
+                }
+                else
+                {
+                    @if (Model.HasBorrowRecords)
+                    {
+                        <div class="alert alert-warning">Ce livre a des emprunts en cours. La suppression est bloquée.</div>
+                        <a asp-page="/Books/Index" class="btn btn-outline-secondary">Retour</a>
+                    }
+                    else
+                    {
+                        <p>Voulez-vous vraiment supprimer <strong>@Model.Book.Title</strong> ?</p>
+                        <form method="post">
+                            <div class="mt-3 d-flex justify-content-between">
+                                <a asp-page="/Books/Index" class="btn btn-outline-secondary">Annuler</a>
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </div>
+                        </form>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

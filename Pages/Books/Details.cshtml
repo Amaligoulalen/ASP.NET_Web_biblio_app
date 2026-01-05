@@ -1,0 +1,351 @@
+@page "{id:int}"
+@model gestion_biblio.Pages.Books.DetailsModel
+@{
+    ViewData["Title"] = "Détails du livre";
+}
+
+<style>
+    .book-details-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .details-card {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(160, 82, 45, 0.15);
+        overflow: hidden;
+        border: 2px solid #FFE4C4;
+    }
+
+    .details-header {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        color: #FFF8DC;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .details-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .details-body {
+        padding: 40px;
+    }
+
+    .book-layout {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    .book-image-section {
+        flex: 0 0 280px;
+    }
+
+    .book-image {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(139, 69, 19, 0.3);
+        border: 3px solid #D2B48C;
+    }
+
+    .no-image-placeholder {
+        width: 100%;
+        height: 400px;
+        background: linear-gradient(135deg, #D2B48C 0%, #FFE4C4 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: #A0522D;
+        border: 3px solid #D2B48C;
+    }
+
+    .book-info-section {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .info-item {
+        display: flex;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #FFE4C4;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #8B4513;
+        min-width: 140px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1.05rem;
+    }
+
+    .info-value {
+        color: #A0522D;
+        flex: 1;
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    .availability-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .available {
+        background-color: #90EE90;
+        color: #2d5016;
+        border: 2px solid #78c878;
+    }
+
+    .limited {
+        background-color: #FFE4C4;
+        color: #A0522D;
+        border: 2px solid #D2B48C;
+    }
+
+    .unavailable {
+        background-color: #FFB6C1;
+        color: #8B1538;
+        border: 2px solid #FF9BAE;
+    }
+
+    .description-box {
+        background-color: #FFF8DC;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #A0522D;
+        margin-top: 10px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 2px solid #FFE4C4;
+        flex-wrap: wrap;
+    }
+
+    .btn-custom {
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        border: 2px solid;
+    }
+
+    .btn-back {
+        background-color: #F5F5DC;
+        color: #8B4513;
+        border-color: #D2B48C;
+    }
+
+    .btn-back:hover {
+        background-color: #FFF8DC;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(160, 82, 45, 0.2);
+        color: #8B4513;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+        color: #FFF8DC;
+        border-color: #8B4513;
+    }
+
+    .btn-edit:hover {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+        color: #FFF8DC;
+    }
+
+    .alert-custom {
+        background: linear-gradient(135deg, #FFB6C1 0%, #FFD1DC 100%);
+        color: #8B1538;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px solid #FF9BAE;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    @@media (max-width: 768px) {
+        .book-layout {
+            flex-direction: column;
+        }
+
+        .book-image-section {
+            flex: 1;
+            max-width: 100%;
+        }
+
+        .details-title {
+            font-size: 1.5rem;
+        }
+
+        .info-item {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-label {
+            min-width: auto;
+        }
+    }
+</style>
+
+<div class="book-details-container">
+    @if (Model.Book == null)
+    {
+        <div class="alert-custom">
+            ❌ Livre introuvable.
+        </div>
+    }
+    else
+    {
+        <div class="details-card">
+            <div class="details-header">
+                <h1 class="details-title">@Model.Book.Title</h1>
+            </div>
+
+            <div class="details-body">
+                <div class="book-layout">
+                    <div class="book-image-section">
+                        @if (!string.IsNullOrEmpty(Model.Book.PicturePath))
+                        {
+                            <img src="~/images/@Model.Book.PicturePath" alt="@Model.Book.Title" class="book-image" />
+                        }
+                        else
+                        {
+                            <div class="no-image-placeholder">
+                                📚
+                            </div>
+                        }
+                    </div>
+
+                    <div class="book-info-section">
+                        <div class="info-item">
+                            <div class="info-label">
+                               @* <span>✍️</span>*@
+                                <span>Auteur</span>
+                            </div>
+                            <div class="info-value">
+                                @(Model.Book.Author != null ? $"{Model.Book.Author.FirstName} {Model.Book.Author.LastName}" : "-")
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">
+                               @* <span>📖</span>*@
+                                <span>ISBN</span>
+                            </div>
+                            <div class="info-value">@Model.Book.ISBN</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">
+                               @* <span>📅</span>*@
+                                <span>Année</span>
+                            </div>
+                            <div class="info-value">@Model.Book.PublicationYear</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">
+                               @* <span>🏷️</span>*@
+                                <span>Catégorie</span>
+                            </div>
+                            <div class="info-value">@(Model.Book.Category?.Name ?? "-")</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">
+                               @* <span>🎭</span>*@
+                                <span>Genre</span>
+                            </div>
+                            <div class="info-value">@Model.Book.Genre</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">
+                               @* <span>📦</span>*@
+                                <span>Disponibilité</span>
+                            </div>
+                            <div class="info-value">
+                                @if (Model.Book.AvailableCopies > 3)
+                                {
+                                    <span class="availability-badge available">
+                                        ✓ Disponible (@Model.Book.AvailableCopies/@Model.Book.TotalCopies)
+                                    </span>
+                                }
+                                else if (Model.Book.AvailableCopies > 0)
+                                {
+                                    <span class="availability-badge limited">
+                                        ⚠️ Peu disponible (@Model.Book.AvailableCopies/@Model.Book.TotalCopies)
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="availability-badge unavailable">
+                                        ✗ Non disponible (0/@Model.Book.TotalCopies)
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.Book.Description))
+                        {
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <span>📝</span>
+                                    <span>Description</span>
+                                </div>
+                                <div class="info-value">
+                                    <div class="description-box">
+                                        @Model.Book.Description
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a class="btn-custom btn-back" asp-page="/Books/Index">
+                        ← Retour à la liste
+                    </a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+                    {
+                        <a class="btn-custom btn-edit" asp-page="/Books/Edit" asp-route-id="@Model.Book.BookID">
+                            ✏️ Modifier
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

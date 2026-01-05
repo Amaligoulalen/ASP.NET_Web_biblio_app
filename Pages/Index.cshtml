@@ -1,0 +1,237 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Accueil";
+}
+
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        color: #FFF8DC;
+        padding: 80px 20px;
+        border-radius: 0 0 50px 50px;
+        margin-bottom: 60px;
+        box-shadow: 0 4px 20px rgba(139, 69, 19, 0.3);
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+        opacity: 0.95;
+    }
+
+    .btn-custom {
+        background-color: #FFE4C4;
+        color: #8B4513;
+        padding: 12px 35px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        border: 2px solid #FFE4C4;
+    }
+
+    .btn-custom:hover {
+        background-color: #FFF8DC;
+        color: #A0522D;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 228, 196, 0.4);
+    }
+
+    .features-section {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        color: #8B4513;
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .feature-card {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(160, 82, 45, 0.1);
+        transition: all 0.3s ease;
+        border: 2px solid #FFE4C4;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(160, 82, 45, 0.2);
+        border-color: #D2B48C;
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        color: #FFF8DC;
+    }
+
+    .feature-title {
+        color: #8B4513;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .feature-text {
+        color: #A0522D;
+        line-height: 1.6;
+    }
+
+    .stats-section {
+        background: linear-gradient(135deg, #D2B48C 0%, #FFE4C4 100%);
+        padding: 50px 20px;
+        margin: 60px 0;
+        border-radius: 30px;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #8B4513;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        color: #A0522D;
+        font-size: 1.1rem;
+    }
+
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<div class="hero-section text-center">
+    <h1 class="hero-title">📚 Système de Gestion de Bibliothèque</h1>
+    <p class="hero-subtitle">Votre passerelle vers la connaissance et l'apprentissage</p>
+    <a asp-page="/Books/Index" class="btn-custom">Explorer le Catalogue</a>
+</div>
+
+<div class="features-section">
+    <h2 class="section-title">Nos Services</h2>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3 class="feature-title">Collection Vaste</h3>
+                <p class="feature-text">Accédez à des milliers de livres dans tous les genres. Des classiques aux œuvres contemporaines, découvrez votre prochaine lecture préférée.</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3 class="feature-title">Recherche Facile</h3>
+                <p class="feature-text">Trouvez des livres rapidement avec notre système de recherche avancé. Filtrez par auteur, genre, date de publication et plus encore.</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3 class="feature-title">Emprunt Simple</h3>
+                <p class="feature-text">Processus d'emprunt fluide avec des enregistrements numériques instantanés. Gérez vos livres empruntés facilement.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">👤</div>
+                <h3 class="feature-title">Portail Membre</h3>
+                <p class="feature-text">Suivez votre historique de lecture, gérez vos réservations et recevez des recommandations personnalisées.</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3 class="feature-title">Accès 24/7</h3>
+                <p class="feature-text">Consultez le catalogue à tout moment, n'importe où. Réservez et renouvelez vos livres depuis chez vous.</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Recommandations Intelligentes</h3>
+                <p class="feature-text">Obtenez des suggestions de livres personnalisées basées sur vos préférences et votre historique de lecture.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="stats-section">
+    <div class="row">
+        <div class="col-md-3 col-6">
+            <div class="stat-item">
+                <div class="stat-number">15 000+</div>
+                <div class="stat-label">Livres</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-item">
+                <div class="stat-number">3 500+</div>
+                <div class="stat-label">Membres Actifs</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Catégories</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Satisfaction</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center" style="padding: 40px 20px;">
+    <h3 style="color: #8B4513; margin-bottom: 20px;">Prêt à commencer votre voyage de lecture ?</h3>
+    <a asp-page="/Books/Index" class="btn-custom">Voir les Livres</a>
+</div>

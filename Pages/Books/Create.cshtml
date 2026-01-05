@@ -1,0 +1,394 @@
+@page
+@model gestion_biblio.Pages.Books.CreateModel
+@{
+    ViewData["Title"] = "Ajouter un livre";
+}
+
+<style>
+    .create-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .create-card {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(160, 82, 45, 0.15);
+        overflow: hidden;
+        border: 2px solid #FFE4C4;
+    }
+
+    .create-header {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        color: #FFF8DC;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .create-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .create-body {
+        padding: 40px;
+    }
+
+    .form-section {
+        margin-bottom: 35px;
+    }
+
+    .section-title {
+        color: #8B4513;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #D2B48C;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-label {
+        color: #8B4513;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #D2B48C;
+        border-radius: 10px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+        background-color: #FFF8DC;
+        color: #8B4513;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #A0522D;
+        box-shadow: 0 0 0 0.2rem rgba(160, 82, 45, 0.15);
+        background-color: #FFFFFF;
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .file-upload-section {
+        background-color: #FFF8DC;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px solid #D2B48C;
+        text-align: center;
+    }
+
+    .file-upload-wrapper {
+        position: relative;
+    }
+
+    .file-upload-label {
+        display: block;
+        padding: 40px 15px;
+        background-color: #FFE4C4;
+        border: 2px dashed #A0522D;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #8B4513;
+        font-weight: 600;
+    }
+
+    .file-upload-label:hover {
+        background-color: #FFF8DC;
+        border-color: #8B4513;
+    }
+
+    .upload-icon {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: space-between;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 2px solid #FFE4C4;
+        flex-wrap: wrap;
+    }
+
+    .btn-custom {
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        border: 2px solid;
+        cursor: pointer;
+    }
+
+    .btn-cancel {
+        background-color: #F5F5DC;
+        color: #8B4513;
+        border-color: #D2B48C;
+    }
+
+    .btn-cancel:hover {
+        background-color: #FFF8DC;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(160, 82, 45, 0.2);
+        color: #8B4513;
+        text-decoration: none;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+        color: #FFF8DC;
+        border-color: #8B4513;
+    }
+
+    .btn-save:hover {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    }
+
+    .validation-summary {
+        background: linear-gradient(135deg, #FFB6C1 0%, #FFD1DC 100%);
+        color: #8B1538;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 2px solid #FF9BAE;
+        margin-bottom: 20px;
+    }
+
+    .text-danger {
+        color: #8B1538 !important;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    .info-box {
+        background: linear-gradient(135deg, #D2B48C 0%, #FFE4C4 100%);
+        padding: 15px;
+        border-radius: 10px;
+        border-left: 4px solid #A0522D;
+        margin-top: 15px;
+        color: #8B4513;
+        font-size: 0.9rem;
+    }
+
+    @@media (max-width: 768px) {
+        .create-title {
+            font-size: 1.5rem;
+        }
+
+        .create-body {
+            padding: 20px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .btn-custom {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<div class="create-container">
+    <div class="create-card">
+        <div class="create-header">
+            <h1 class="create-title">➕ Ajouter un nouveau livre</h1>
+        </div>
+
+        <div class="create-body">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+                <!-- Informations principales -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span>📚</span>
+                        <span>Informations principales</span>
+                    </h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Book.Title" class="form-label">
+                         
+                                <span>Titre</span>
+                            </label>
+                            <input asp-for="Book.Title" class="form-control" placeholder="Entrez le titre du livre" />
+                            <span asp-validation-for="Book.Title" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Book.AuthorID" class="form-label">
+                              
+                                <span>Auteur</span>
+                            </label>
+                            <select asp-for="Book.AuthorID" class="form-select" asp-items="Model.AuthorOptions">
+                                <option value="">-- Sélectionnez un auteur --</option>
+                            </select>
+                            <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Book.ISBN" class="form-label">
+                              
+                                <span>ISBN</span>
+                            </label>
+                            <input asp-for="Book.ISBN" class="form-control" placeholder="Ex: 978-3-16-148410-0" />
+                            <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Book.PublicationYear" class="form-label">
+                            
+                                <span>Année de publication</span>
+                            </label>
+                            <input asp-for="Book.PublicationYear" class="form-control" type="number" placeholder="Ex: 2024" />
+                            <span asp-validation-for="Book.PublicationYear" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classification -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                    
+                        <span>Classification</span>
+                    </h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Book.CategoryID" class="form-label">
+                                <span>📂</span>
+                                <span>Catégorie</span>
+                            </label>
+                            <select asp-for="Book.CategoryID" class="form-select" asp-items="Model.CategoryOptions">
+                                <option value="">-- Aucune --</option>
+                            </select>
+                            <span asp-validation-for="Book.CategoryID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Book.Genre" class="form-label">
+                               
+                                <span>Genre</span>
+                            </label>
+                            <input asp-for="Book.Genre" class="form-control" placeholder="Ex: Fiction, Science-fiction..." />
+                            <span asp-validation-for="Book.Genre" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventaire -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                     
+                        <span>Inventaire</span>
+                    </h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Book.TotalCopies" class="form-label">
+                                <span>📚</span>
+                                <span>Nombre total d'exemplaires</span>
+                            </label>
+                            <input asp-for="Book.TotalCopies" class="form-control" type="number" min="0" value="1" />
+                            <span asp-validation-for="Book.TotalCopies" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Book.AvailableCopies" class="form-label">
+                                
+                                <span>Exemplaires disponibles</span>
+                            </label>
+                            <input asp-for="Book.AvailableCopies" class="form-control" type="number" min="0" value="0" />
+                            <span asp-validation-for="Book.AvailableCopies" class="text-danger"></span>
+                            <div class="info-box">
+                                Si vous laissez 0, tous les exemplaires seront automatiquement marqués comme disponibles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                     
+                        <span>Description</span>
+                    </h2>
+                    <div class="col-12">
+                        <label asp-for="Book.Description" class="form-label">Description du livre</label>
+                        <textarea asp-for="Book.Description"
+                                  class="form-control"
+                                  rows="5"
+                                  placeholder="Entrez une description détaillée du livre..."></textarea>
+                        <span asp-validation-for="Book.Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Image de couverture -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                   
+                        <span>Image de couverture</span>
+                    </h2>
+                    <div class="file-upload-section">
+                        <div class="file-upload-wrapper">
+                            <label for="uploadedFile" class="file-upload-label">
+                                <span class="upload-icon">📁</span>
+                                <span>Cliquez pour sélectionner une image</span>
+                                <small style="display: block; margin-top: 10px; opacity: 0.8;">
+                                    Formats acceptés: JPG, PNG, GIF
+                                </small>
+                            </label>
+                            <input asp-for="Book.PicturePath" 
+                                   type="file" 
+                                   id="uploadedFile"
+                                   class="form-control" 
+                                   name="uploadedFile"
+                                   accept="image/*" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boutons d'action -->
+                <div class="action-buttons">
+                    <a asp-page="/Books/Index" class="btn-custom btn-cancel">
+                        ← Annuler
+                    </a>
+                    <button type="submit" class="btn-custom btn-save">
+                         Enregistrer le livre
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Afficher le nom du fichier sélectionné
+        document.getElementById('uploadedFile').addEventListener('change', function(e) {
+            var fileName = e.target.files[0]?.name || 'Aucun fichier sélectionné';
+            var label = document.querySelector('.file-upload-label');
+            label.innerHTML = '<span class="upload-icon">✓</span><span>' + fileName + '</span>';
+        });
+    </script>
+}

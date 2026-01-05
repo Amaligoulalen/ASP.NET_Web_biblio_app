@@ -1,0 +1,339 @@
+@page
+@model gestion_biblio.Pages.Members.IndexModel
+@{
+    ViewData["Title"] = "Gérer les utilisateurs";
+}
+
+<style>
+    .members-container {
+        max-width: 1400px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .members-header {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        color: #FFF8DC;
+        padding: 40px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(139, 69, 19, 0.3);
+        text-align: center;
+    }
+
+    .members-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .members-subtitle {
+        font-size: 1.1rem;
+        margin-top: 10px;
+        opacity: 0.9;
+    }
+
+    .search-card {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(160, 82, 45, 0.1);
+        border: 2px solid #FFE4C4;
+    }
+
+    .search-label {
+        color: #8B4513;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .search-input {
+        border: 2px solid #D2B48C;
+        border-radius: 10px;
+        padding: 12px 15px;
+        transition: all 0.3s ease;
+        background-color: #FFF8DC;
+        color: #8B4513;
+    }
+
+    .search-input:focus {
+        border-color: #A0522D;
+        box-shadow: 0 0 0 0.2rem rgba(160, 82, 45, 0.15);
+        background-color: #FFFFFF;
+        outline: none;
+    }
+
+    .btn-search {
+        background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+        color: #FFF8DC;
+        padding: 12px 30px;
+        border-radius: 10px;
+        font-weight: 600;
+        border: 2px solid #8B4513;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .btn-search:hover {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+        color: #FFF8DC;
+    }
+
+    .members-stats {
+        background: linear-gradient(135deg, #D2B48C 0%, #FFE4C4 100%);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .stats-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #8B4513;
+    }
+
+    .stats-label {
+        color: #A0522D;
+        font-weight: 600;
+    }
+
+    .table-container {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(160, 82, 45, 0.1);
+        border: 2px solid #FFE4C4;
+        overflow: hidden;
+    }
+
+    .table-lib {
+        margin: 0;
+        width: 100%;
+    }
+
+    .table-lib thead {
+        background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+        color: #FFF8DC;
+    }
+
+    .table-lib thead th {
+        padding: 15px;
+        font-weight: 600;
+        border: none;
+        text-align: left;
+    }
+
+    .table-lib tbody tr {
+        border-bottom: 1px solid #FFE4C4;
+        transition: all 0.3s ease;
+    }
+
+    .table-lib tbody tr:hover {
+        background-color: #FFF8DC;
+        transform: scale(1.01);
+    }
+
+    .table-lib tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .table-lib tbody td {
+        padding: 15px;
+        color: #8B4513;
+        vertical-align: middle;
+    }
+
+    .member-card {
+        background: linear-gradient(145deg, #FFF8DC 0%, #F5F5DC 100%);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 3px 10px rgba(160, 82, 45, 0.1);
+        border: 2px solid #FFE4C4;
+        transition: all 0.3s ease;
+    }
+
+    .member-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(160, 82, 45, 0.2);
+        border-color: #D2B48C;
+    }
+
+    .member-name {
+        color: #8B4513;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .member-info {
+        color: #A0522D;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #A0522D;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+
+    .empty-text {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    @@media (max-width: 768px) {
+        .members-title {
+            font-size: 1.8rem;
+        }
+
+        .table-container {
+            display: none;
+        }
+
+        .member-cards-mobile {
+            display: block !important;
+        }
+    }
+
+    @@media (min-width: 769px) {
+        .member-cards-mobile {
+            display: none;
+        }
+    }
+</style>
+
+<div class="members-container">
+    <!-- Header -->
+    <div class="members-header">
+        <h1 class="members-title"> Gestion des Membres</h1>
+        <p class="members-subtitle">Gérez et consultez les informations des membres de la bibliothèque</p>
+    </div>
+
+    <!-- Statistiques -->
+    <div class="members-stats">
+        <div class="stats-number">@Model.Members.Count</div>
+        <div class="stats-label">Membre@(Model.Members.Count > 1 ? "s" : "") @(string.IsNullOrWhiteSpace(Model.Q) ? "au total" : "trouvé(s)")</div>
+    </div>
+
+    <!-- Recherche -->
+    <div class="search-card">
+        <form method="get" class="row g-3 align-items-end">
+            <div class="col-md-9">
+                <label class="search-label">
+                 
+                    <span>Rechercher un membre</span>
+                </label>
+                <input name="q" 
+                       value="@Model.Q" 
+                       class="search-input form-control" 
+                       placeholder="Entrez un nom, prénom ou email..." />
+            </div>
+            <div class="col-md-3">
+                <button class="btn-search" type="submit">
+                  
+                    <span>Rechercher</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    @if (Model.Members.Any())
+    {
+        <!-- Table Desktop -->
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table-lib">
+                    <thead>
+                        <tr>
+                            <th> Nom</th>
+                            <th> Email</th>
+                            <th>Téléphone</th>
+                            <th> Inscription</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var m in Model.Members)
+                    {
+                        <tr>
+                            <td><strong>@m.FirstName @m.LastName</strong></td>
+                            <td>@m.Email</td>
+                            <td>@(string.IsNullOrWhiteSpace(m.PhoneNumber) ? "-" : m.PhoneNumber)</td>
+                            <td>@m.RegistrationDate.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Cards Mobile -->
+        <div class="member-cards-mobile">
+            @foreach (var m in Model.Members)
+            {
+                <div class="member-card">
+                    <div class="member-name">
+                      
+                        <span>@m.FirstName @m.LastName</span>
+                    </div>
+                    <div class="member-info">
+                     
+                        <span>@m.Email</span>
+                    </div>
+                    @if (!string.IsNullOrWhiteSpace(m.PhoneNumber))
+                    {
+                        <div class="member-info">
+                           
+                            <span>@m.PhoneNumber</span>
+                        </div>
+                    }
+                    <div class="member-info">
+                      
+                        <span>Inscrit le @m.RegistrationDate.ToString("dd/MM/yyyy")</span>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="table-container">
+            <div class="empty-state">
+                <div class="empty-icon">🔍</div>
+                <div class="empty-text">
+                    @if (string.IsNullOrWhiteSpace(Model.Q))
+                    {
+                        <span>Aucun membre enregistré</span>
+                    }
+                    else
+                    {
+                        <span>Aucun membre trouvé pour "@Model.Q"</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
